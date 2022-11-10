@@ -1,0 +1,12 @@
+{
+    "name": "whois/masjid",
+    "autoload": {
+        "psr-4": {
+            "Whois\\Masjid\\": "src/"
+        }
+    },
+    "require": {
+        "tecnickcom/tcpdf": "^6.5",
+        "phpoffice/phpspreadsheet": "^1.25"
+    }
+}
