@@ -241,7 +241,7 @@
                 <!-- ARISAN -->
                 <div class="main_content">
                     <div class="card_green">
-                        <h3 class="title_arisan mb-4">Data Arisan Kurban Oktober 2022</h3>
+                        <h3 class="title_arisan mb-4">Data Arisan Kurban <?= $bulan_terbilang; ?> <?= $tahun; ?></h3>
                         <div class="bg-white panel_arisan">
                             <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="arisan">
@@ -259,6 +259,7 @@
                                 <div class="tab-pane fade show active" id="pills-lunas" role="tabpanel" aria-labelledby="pills-lunas-tab">
                                     <ul class="arisan_list" id="list_arisan_lunas">
                                         <?php $j = 1;
+                                        // var_dump($cicilan_bulan_arisan->result_array());
 
                                         foreach ($arisan_kurban->result_array() as $data_arisan) {
                                             $perbulan_harus = $data_arisan['biaya'] / 12;

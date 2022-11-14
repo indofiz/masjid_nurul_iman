@@ -4,23 +4,37 @@
             <div class="col-12 col-md-5">
                 <h5>Layanan</h5>
                 <div class="row">
+                    <?php
+                    $hitung_layanan = count($layanan->result_array());
+                    if ($hitung_layanan >= 2) {
+                        $jumlah_per = $hitung_layanan / 2;
+                    } else {
+                        $jumlah_per = $hitung_layanan;
+                    }
+                    $data = $layanan->result_array();
+                    ?>
                     <div class="col-6">
                         <ul>
-                            <li><a href="">Shalat Berjamaah</a></li>
-                            <li><a href="">Majelis Taklim</a></li>
-                            <li><a href="">Jumat Berkah</a></li>
-                            <li><a href="">Arisan Kurban</a></li>
-                            <li><a href="">Pemakaman</a></li>
+                            <?php
+                            $no = 1;
+                            foreach ($data as $index => $layanan) :
+                                if ($index <= $jumlah_per - 1) :
+                            ?>
+                                    <li><?= $layanan['nama_layanan']; ?></li>
+                            <?php endif;
+                            endforeach; ?>
                         </ul>
                     </div>
                     <div class="col-6">
                         <ul>
-                            <li><a href="">Taman pendidikan alquran</a></li>
-                            <li><a href="">Kegitan sosial</a></li>
-                            <li><a href="">Amil Zakat</a></li>
-                            <li>
-                                <a href="">Santunan anak yatim /pitu & lansia miskin</a>
-                            </li>
+                            <?php
+                            $no2 = 1;
+                            foreach ($data as $index2 => $layanan2) :
+                                if ($index2 > $jumlah_per - 1) :
+                            ?>
+                                    <li><?= $layanan2['nama_layanan']; ?></li>
+                            <?php endif;
+                            endforeach; ?>
                         </ul>
                     </div>
                 </div>

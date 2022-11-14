@@ -413,7 +413,8 @@
         // Create chart
         // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
         var chart = root.container.children.push(am5percent.PieChart.new(root, {
-          layout: root.verticalLayout
+          layout: root.verticalLayout,
+          radius: 120
         }));
 
         // Create serie
@@ -421,15 +422,21 @@
         var series = chart.series.push(am5percent.PieSeries.new(root, {
           valueField: "value",
           categoryField: "category",
+          alignLabels: false,
           legendLabelText: "[{fill}]{category}[/]",
           legendValueText: "[bold {fill}]{value}[/]"
         }));
 
         series.labels.template.setAll({
-          fontSize: 18,
+          radius: 16,
+          maxWidth: 110,
+          oversizedBehavior: "wrap",
+          fontSize: 16,
+          textAlign: "left",
           fill: am5.color(0x333333),
           text: "[bold]{category}[/]"
         });
+
         series.slices.template.set("tooltipText", "{category}: ({value})");
         // Set data
         series.data.setAll(data);

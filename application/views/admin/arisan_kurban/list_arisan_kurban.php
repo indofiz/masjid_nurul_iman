@@ -62,6 +62,7 @@
                         </thead>
                         <tbody>
                           <?php $j = 1;
+                          // var_dump($cicilan_bulan_arisan->result_array());
                           foreach ($arisan_kurban->result_array() as $data_arisan) :
                             $perbulan_harus = $data_arisan['biaya'] / 12;
                             // MELAKUKAN PERHITUNGAN JUMLAH PEMBAYARAN BULAN INI
@@ -237,8 +238,18 @@
                   <div class="item form-group">
                     <label class="col-form-label col-md-4 col-sm-4 label-align">Nama Donatur</label>
                     <div class="col-md-7 col-sm-7 ">
-                      <input class="form-control" type="text" id="nama_donatur_tambah" value="" name="nama_donatur" placeholder="Nama Donatur" required />
-                      <input type="hidden" id="id_donatur" name="id_donatur" required />
+                      <!-- <input class="form-control" type="text" id="nama_donatur_tambah" value="" name="nama_donatur" placeholder="Nama Donatur" required />
+                      <input type="hidden" id="id_donatur" name="id_donatur" required /> -->
+                      <select class="js-example-basic-single" style="width: 100%;border-radius:none" name="id_donatur">
+                        <option value=""></option>
+                        <option value="AL">Alabama</option>
+                        <option value="WY">Wyoming</option>
+                        <option value="W">fewaf</option>
+                        <option value="W3">fewaf</option>
+                        <option value="W4">fewaf</option>
+                        <option value="W5">fewaf</option>
+                        <option value="W56">fewaf</option>
+                      </select>
                     </div>
                   </div>
 
@@ -316,6 +327,7 @@
   <script src="<?php echo base_url('assets/jszip/dist/jszip.min.js') ?>"></script>
   <script src="<?php echo base_url('assets/pdfmake/build/pdfmake.min.js') ?>"></script>
   <script src="<?php echo base_url('assets/pdfmake/build/vfs_fonts.js') ?>"></script>
+  <script src="<?php echo base_url('assets/select2/js/select2.min.js') ?>"></script>
 
 
   <!-- Custom Theme Scripts -->
@@ -331,7 +343,12 @@
       $('#deleteModal').modal();
     }
 
+
     $(document).ready(function() {
+      // PENCARIAN SELECT2
+      $('.js-example-basic-single').select2({
+        placeholder: 'Ambil Jamaah'
+      });;
       $('#datatable2').dataTable();
       $("#nama_donatur_tambah").autocomplete({
         source: "<?= base_url('admin/arisan_kurban/get_autocomplete/'); ?>",

@@ -29,8 +29,9 @@ class Awal extends CI_Controller
         $data['list_bulanan_keluar'] = $this->M_rekapitulasi->list_rekapitulasi_filter_keluar($data['bulan'], $data['tahun'])->result_array();
         $data['list_rekapitulasi'] = $this->M_rekapitulasi->list_rekapitulasi_union($data['bulan'], $data['tahun'])->result_array();
         $data['berita'] = $this->M_berita->list_berita_status(2);
-        $data['arisan_kurban'] = $this->M_arisan->list_arisan_filter($data['tahun'], 0);
+        $data['arisan_kurban'] = $this->M_arisan->list_arisan();
         $data['profil'] = $this->M_profilMasjid->getDataProfil()->row_array();
+        $data['layanan'] = $this->M_profilMasjid->list_layanan();
 
         $data['cicilan_bulan_arisan'] = $this->M_arisan->list_cicilan_bulan_ini($data['bulan'], $data['tahun']);
 

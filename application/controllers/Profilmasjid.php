@@ -10,7 +10,6 @@ class Profilmasjid extends CI_Controller
         $this->load->model('M_profilMasjid');
         $this->load->helper('dates_helper');
         $this->load->helper('rupiah_helper');
-        $this->load->model('M_profilMasjid');
     }
 
     public function index()
