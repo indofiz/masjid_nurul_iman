@@ -242,13 +242,10 @@
                       <input type="hidden" id="id_donatur" name="id_donatur" required /> -->
                       <select class="js-example-basic-single" style="width: 100%;border-radius:none" name="id_donatur">
                         <option value=""></option>
-                        <option value="AL">Alabama</option>
-                        <option value="WY">Wyoming</option>
-                        <option value="W">fewaf</option>
-                        <option value="W3">fewaf</option>
-                        <option value="W4">fewaf</option>
-                        <option value="W5">fewaf</option>
-                        <option value="W56">fewaf</option>
+                        <?php foreach ($jamaah->result_array() as $data_jamaah) :
+                        ?>
+                          <option value="<?= $data_jamaah['id_jamaah']; ?>"><?= $data_jamaah['nama_jamaah']; ?></option>
+                        <?php endforeach; ?>
                       </select>
                     </div>
                   </div>
@@ -347,8 +344,8 @@
     $(document).ready(function() {
       // PENCARIAN SELECT2
       $('.js-example-basic-single').select2({
-        placeholder: 'Ambil Jamaah'
-      });;
+        placeholder: 'Cari Donatur'
+      });
       $('#datatable2').dataTable();
       $("#nama_donatur_tambah").autocomplete({
         source: "<?= base_url('admin/arisan_kurban/get_autocomplete/'); ?>",

@@ -55,3 +55,4 @@
     <link href="<?php echo base_url('assets/pnotify/dist/pnotify.buttons.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/pnotify/dist/pnotify.nonblock.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/select2/css/select2.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/select2/css/custom.css') ?>" rel="stylesheet">

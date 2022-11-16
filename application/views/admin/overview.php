@@ -213,7 +213,7 @@
   <script src="<?php echo base_url('assets/amcharts5/themes/Animated.js') ?>"></script>
   <!-- Chart code -->
   <script>
-    $.ajax('<?= base_url('admin/pemasukan/apiKategoriChart'); ?>', {
+    $.ajax('<?= base_url('admin/overview/apiKategoriChartPemasukan'); ?>', {
       type: 'get',
       data: {
         bulan: <?= $bulan; ?>,
@@ -228,7 +228,7 @@
       }
     });
 
-    $.ajax('<?= base_url('admin/pengeluaran/apiKategoriChart'); ?>', {
+    $.ajax('<?= base_url('admin/overview/apiKategoriChartPengeluaran'); ?>', {
       type: 'get',
       data: {
         bulan: <?= $bulan; ?>,
@@ -242,7 +242,7 @@
         console.log('Error: ' + errorMessage);
       }
     });
-    $.ajax('<?= base_url('admin/arisan_kurban/apiArisanBulanIni'); ?>', {
+    $.ajax('<?= base_url('admin/overview/apiArisanBulanIni'); ?>', {
       type: 'get',
       data: {
         bulan: <?= $bulan; ?>,
@@ -293,7 +293,8 @@
         // Create chart
         // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
         var chart = root.container.children.push(am5percent.PieChart.new(root, {
-          layout: root.verticalLayout
+          layout: root.verticalLayout,
+          radius: 100
         }));
 
         // Create serie
@@ -301,12 +302,17 @@
         var series = chart.series.push(am5percent.PieSeries.new(root, {
           valueField: "value",
           categoryField: "category",
+          alignLabels: false,
           legendLabelText: "[{fill}]{category}[/]",
           legendValueText: ""
         }));
 
         series.labels.template.setAll({
-          fontSize: 18,
+          radius: 16,
+          maxWidth: 110,
+          oversizedBehavior: "wrap",
+          fontSize: 16,
+          textAlign: "left",
           fill: am5.color(0x333333),
           text: "[bold]{category}[/]"
         });
@@ -318,7 +324,7 @@
         var legend = chart.children.push(am5.Legend.new(root, {
           centerX: am5.percent(50),
           x: am5.percent(50),
-          marginTop: 15,
+          marginTop: 5,
           marginBottom: 15
         }));
 

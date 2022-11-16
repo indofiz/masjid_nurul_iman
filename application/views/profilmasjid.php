@@ -20,7 +20,7 @@
         <div id="hero_profil" class="container bg-green">
             <div class="d-flex flex-column text-center justify-content-center align-items-center">
                 <h1 class="font-russo head_profil">Profil Masjid Nurul Iman</h1>
-                <img src="<?= base_url('assets/depan/masjid.jpg'); ?>" alt="" class="image_profil" />
+                <img src="<?= base_url('./images/' . $profil['upload_img']); ?>" alt="" class="image_profil" />
             </div>
         </div>
     </header>
@@ -30,28 +30,13 @@
         <div class="main_content container">
             <h3 class="main_title mb-5 text-center">Sejarah & Profil</h3>
             <p class="black-2 text-justify">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                eleifend vitae ut laoreet ipsum est scelerisque. Platea porta sem diam
-                amet, vivamus sit in lobortis. Imperdiet fames vitae condimentum nec
-                eu. Pellentesque dignissim quis porttitor egestas. Nulla ac a arcu
-                viverra elementum, platea elementum. Mollis feugiat elit tempus etiam
-                rhoncus vitae facilisis pulvinar. Mi ut urna quam aliquam in ultrices
-                turpis. Ut auctor est et nunc consectetur. Molestie nunc diam
-                ultricies ante cursus sed nulla cras. Est ornare at ullamcorper
-                tincidunt amet. Eu tincidunt libero massa nulla at tempor felis.
-                Vestibulum urna non sit senectus viverra pellentesque massa gravida
-                erat. Faucibus pretium mi donec vel tristique risus. Aliquet risus
-                aliquam, facilisi nullam hac. Nisl ut amet, posuere interdum mauris
-                felis, justo, id erat. Commodo consectetur eu purus viverra sed. Nibh
-                ac sed integer cras tincidunt nec mattis porta. Eu risus nulla
-                condimentum enim sit duis integer tortor. Diam etiam pharetra nunc
-                pulvinar non morbi.
+                <?= $profil['desk_profil']; ?>
             </p>
         </div>
         <!-- STRUKTUR ORGANISASI -->
         <div class="main_content container">
             <h3 class="main_title mb-5 text-center">Struktur Organisasi</h3>
-            <img src="<?= base_url('assets/depan/struktur.png'); ?>" class="image-fluid container mx-auto px-5" alt="" />
+            <img src="<?= base_url('./images/' . $sdm['foto_bagan']); ?>" class="image-fluid container mx-auto px-5" alt="" />
         </div>
         <!-- INFORMASI TAMBAHAN -->
         <div class="main_content container">
