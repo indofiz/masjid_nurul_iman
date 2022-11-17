@@ -218,10 +218,10 @@
                         <tr>
                           <td align="center"><?php echo $j++ ?></td>
                           <td><?= $data_layanan['nama_layanan']; ?></td>
-                          <td><?= $data_layanan['pj_layanan']; ?></td>
-                          <td><?= $data_layanan['kontak_layanan']; ?></td>
+                          <td><?= $data_layanan['nama_jamaah']; ?></td>
+                          <td><?= $data_layanan['telepon_jamaah']; ?></td>
                           <td align="center">
-                            <a href="" onclick="editLayanan(event, '<?= $data_layanan['id_layanan']; ?>', '<?= $data_layanan['nama_layanan']; ?>','<?= $data_layanan['pj_layanan']; ?>','<?= $data_layanan['kontak_layanan']; ?>')"><i class="fa fa-edit"></i> Edit</a>
+                            <a href="" onclick="editLayanan(event, '<?= $data_layanan['id_layanan']; ?>', '<?= $data_layanan['nama_layanan']; ?>','<?= $data_layanan['pj_layanan']; ?>','<?= $data_layanan['nama_jamaah']; ?>')"><i class="fa fa-edit"></i> Edit</a>
 
                             <a href="" onclick="deleteConfirm(event,'<?= base_url(); ?>/admin/profil_masjid/hapusLayanan/<?= $data_layanan['id_layanan']; ?>')"><i class="fa fa-trash"></i> Hapus</a>
                           </td>
@@ -275,16 +275,16 @@
             <div class="form-group col-md-12 col-sm-12">
               <label class="col-form-label col-md-3 col-sm-3 label-align" for="pj_layanan">Penanggung Jawab : </label>
               <div class="col-md-8 col-sm-8 ">
-                <input class="form-control" type="text" name="pj_layanan" id="pj_layanan" placeholder="Nama" required />
+                <select class="js-example-basic-single-edit" style="width: 100%;border-radius:none" name="pj_layanan">
+                  <option value=""></option>
+                  <?php foreach ($jamaah->result_array() as $data_jamaah) :
+                  ?>
+                    <option value="<?= $data_jamaah['id_jamaah']; ?>"><?= $data_jamaah['nama_jamaah']; ?></option>
+                  <?php endforeach; ?>
+                </select>
               </div>
             </div>
 
-            <div class="form-group col-md-12 col-sm-12">
-              <label class="col-form-label col-md-3 col-sm-3 label-align" for="kontak_layanan">Kontak : </label>
-              <div class="col-md-8 col-sm-8 ">
-                <input class="form-control inputan_angka" type="tel" pattern="[0-9]*" name="kontak_layanan" id="kontak_layanan" placeholder="No. Telepon" required />
-              </div>
-            </div>
             <br>
 
             <div class="modal-footer">
@@ -340,16 +340,17 @@
               <div class="item form-group">
                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="pj_layanan">Penanggung Jawab : </label>
                 <div class="col-md-8 col-sm-8 ">
-                  <input class="form-control" type="text" name="pj_layanan" id="pj_layanan" placeholder="Nama" required />
+                  <select class="js-example-basic-single" style="width: 100%;border-radius:none" name="pj_layanan">
+                    <option value=""></option>
+                    <?php foreach ($jamaah->result_array() as $data_jamaah) :
+                    ?>
+                      <option value="<?= $data_jamaah['id_jamaah']; ?>"><?= $data_jamaah['nama_jamaah']; ?></option>
+                    <?php endforeach; ?>
+                  </select>
                 </div>
               </div>
 
-              <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" for="kontak_layanan">Kontak : </label>
-                <div class="col-md-8 col-sm-8 ">
-                  <input class="form-control inputan_angka" type="tel" pattern="[0-9]*" name="kontak_layanan" id="kontak_layanan" placeholder="No. Telepon" required />
-                </div>
-              </div>
+
               <br>
 
               <div class="modal-footer">
@@ -380,15 +381,6 @@
       e.preventDefault();
       $('#btn-delete').attr('href', url);
       $('#deleteModal').modal();
-    }
-
-    function editLayanan(e, id, nama, pj, kontak) {
-      e.preventDefault();
-      $("#id_layanan").val(id);
-      $("#nama_layanan").val(nama);
-      $("#pj_layanan").val(pj);
-      $("#kontak_layanan").val(kontak);
-      $('#editModal').modal();
     }
   </script>
 
@@ -424,9 +416,25 @@
   <script src="<?php echo base_url('assets/jszip/dist/jszip.min.js') ?>"></script>
   <script src="<?php echo base_url('assets/pdfmake/build/pdfmake.min.js') ?>"></script>
   <script src="<?php echo base_url('assets/pdfmake/build/vfs_fonts.js') ?>"></script>
+  <script src="<?php echo base_url('assets/select2/js/select2.min.js') ?>"></script>
+
 
   <!-- Initialize datetimepicker -->
   <script type="text/javascript">
+    function editLayanan(e, id, nama, pj, nama_jemaah) {
+      e.preventDefault();
+      $('.js-example-basic-single-edit').select2({
+        placeholder: nama_jemaah
+      });
+      $('.js-example-basic-single-edit').val(pj);
+      $("#id_layanan").val(id);
+      $("#nama_layanan").val(nama);
+      $("#pj_layanan").val(pj);
+      $('#editModal').modal();
+    }
+    $('.js-example-basic-single').select2({
+      placeholder: 'Cari Donatur'
+    });
     $(".inputan_angka").on('input', function(e) {
       $(this).val($(this).val().replace(/[^0-9]/g, ''));
     });

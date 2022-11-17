@@ -8,6 +8,8 @@ class Profil_masjid extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_profilMasjid');
+        $this->load->model('M_jamaah');
+
         $this->load->library('form_validation');
         if ($this->session->userdata('status') == "login") {
             if ($this->session->userdata('role') != "Admin") {
@@ -25,6 +27,8 @@ class Profil_masjid extends CI_Controller
         $data['layanan'] = $this->M_profilMasjid->list_layanan();
         $data['profil'] = $this->M_profilMasjid->getDataProfil()->row_array();
         $data['sdm'] = $this->M_profilMasjid->getDataSDM()->row_array();
+        $data['jamaah'] = $this->M_jamaah->list_jamaah();
+
         $this->load->view('admin/profil_masjid/profil', $data);
     }
 
@@ -110,8 +114,7 @@ class Profil_masjid extends CI_Controller
     {
         $nama_layanan = $this->input->post('nama_layanan');
         $pj_layanan = $this->input->post('pj_layanan');
-        $kontak_layanan = $this->input->post('kontak_layanan');
-        $this->M_profilMasjid->input_layanan($nama_layanan, $pj_layanan, $kontak_layanan);
+        $this->M_profilMasjid->input_layanan($nama_layanan, $pj_layanan);
         $this->session->set_flashdata('success', 'Item berhasil ditambahkan');
         redirect('admin/profil_masjid');
     }
@@ -121,8 +124,7 @@ class Profil_masjid extends CI_Controller
         $id_layanan = $this->input->post('id_layanan');
         $nama_layanan = $this->input->post('nama_layanan');
         $pj_layanan = $this->input->post('pj_layanan');
-        $kontak_layanan = $this->input->post('kontak_layanan');
-        $this->M_profilMasjid->edit_layanan($id_layanan, $nama_layanan, $pj_layanan, $kontak_layanan);
+        $this->M_profilMasjid->edit_layanan($id_layanan, $nama_layanan, $pj_layanan);
         $this->session->set_flashdata('success', 'Item berhasil diedit');
         redirect('admin/profil_masjid');
     }

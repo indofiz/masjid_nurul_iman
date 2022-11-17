@@ -4,8 +4,11 @@ class M_profilMasjid extends CI_Model
 {
     function list_layanan()
     {
-        $this->db->order_by('id_layanan', 'DESC');
-        return $this->db->get("layanan");
+        $this->db->select('*');
+        $this->db->from('layanan a');
+        $this->db->join('jamaah b', 'a.pj_layanan = b.id_jamaah');
+        $this->db->order_by('a.id_layanan', 'DESC');
+        return $this->db->get();
     }
 
     public function getDataProfil()
@@ -37,19 +40,17 @@ class M_profilMasjid extends CI_Model
         $data = [
             'nama_layanan' => $nama_layanan,
             'pj_layanan' => $pj_layanan,
-            'kontak_layanan' => $kontak_layanan
         ];
 
         $this->db->insert('layanan', $data);
     }
 
-    public function edit_layanan($id_layanan = null, $nama_layanan = null, $pj_layanan = null, $kontak_layanan = null)
+    public function edit_layanan($id_layanan = null, $nama_layanan = null, $pj_layanan = null)
     {
         $data = [
             'id_layanan' => $id_layanan,
             'nama_layanan' => $nama_layanan,
             'pj_layanan' => $pj_layanan,
-            'kontak_layanan' => $kontak_layanan
         ];
         $this->db->where('id_layanan', $id_layanan);
         $this->db->update('layanan', $data);
