@@ -25,7 +25,7 @@
           <!--  <li><a href="#"  data-toggle="modal" data-target="#uploadrekap"><center><button type="button" class="btn btn-info btn-md">Upload Data</button></center></a></li> -->
           <li><a href="<?php echo site_url('admin/overview') ?>"><i class="fa fa-home"></i> Home <span class="fa fa-chevron"></span></a>
           </li>
-          <?php if ($role == 'Bendahara' || $role == 'Admin') : ?>
+          <?php if ($role == 'Bendahara' || $role == 'Admin' || $role == 'Sekretaris') : ?>
             <li><a><i class="fa fa-area-chart"></i> Rekapitulasi <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li><a href="<?php echo site_url('admin/rekapitulasi') ?>">Rekapitulasi Bulanan </a></li>
@@ -41,7 +41,7 @@
             </li>
           <?php endif; ?>
 
-          <?php if ($role == 'Bendahara' || $role == 'Admin') : ?>
+          <?php if ($role == 'Bendahara' || $role == 'Admin' || $role == 'Sekretaris') : ?>
 
             <li><a><i class="fa fa-money"></i> Keuangan <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">

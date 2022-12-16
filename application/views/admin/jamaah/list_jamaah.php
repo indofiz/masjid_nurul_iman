@@ -62,6 +62,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <th>Nama</th>
                             <th>Telepon</th>
                             <th>Alamat</th>
+                            <th>Ditambahkan</th>
                             <th>Aksi</th>
                           </tr>
                         </thead>
@@ -74,8 +75,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                               <td width="200"><?= $data_jamaah['nama_jamaah']; ?></td>
                               <td width="50"><?= $data_jamaah['telepon_jamaah']; ?></td>
                               <td width="350"><?= $data_jamaah['alamat_jamaah']; ?></td>
+                              <td width="350"><?= dates($data_jamaah['tanggal_ditambah']); ?></td>
                               <td width="150" align="center">
-                                <a href="" onclick="editData(event, '<?= $data_jamaah['id_jamaah']; ?>','<?= $data_jamaah['nama_jamaah']; ?>','<?= $data_jamaah['telepon_jamaah']; ?>','<?= $data_jamaah['alamat_jamaah']; ?>')"><i class="fa fa-edit"></i> Edit</a>
+                                <a href="" onclick="editData(event, '<?= $data_jamaah['id_jamaah']; ?>','<?= $data_jamaah['nama_jamaah']; ?>','<?= $data_jamaah['telepon_jamaah']; ?>','<?= $data_jamaah['alamat_jamaah']; ?>','<?= $data_jamaah['tanggal_lahir']; ?>','<?= $data_jamaah['jenis_kelamin']; ?>')"><i class="fa fa-edit"></i> Edit</a>
                                 <a href="" onclick="deleteConfirm(event,'<?= base_url(); ?>/admin/jamaah/hapus/<?= $data_jamaah['id_jamaah']; ?>')"><i class="fa fa-trash"></i> Hapus</a>
                               </td>
                             </tr>
@@ -155,6 +157,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <textarea class="form-control" name="alamat_jamaah" id="alamat_jamaah" placeholder="Alamat" required></textarea>
               </div>
             </div>
+
+            <div class="form-group col-md-12 col-sm-12">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="alamat_jamaah">Tanggal Lahir</label>
+              <div class="col-md-8 col-sm-8 ">
+                <div class='input-group date myDatepicker3'>
+                  <input type="text" class="form-control" placeholder="Tanggal Lahir " name="tanggal_lahir" id="tanggal_lhr_edit" required />
+                  <span class="input-group-addon" style="padding-top: 10px">
+                    <span class="fa fa-calendar-o"></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group col-md-12 col-sm-12">
+              <label class="col-form-label col-md-3 col-sm-3 label-align" for="alamat_jamaah">Jenis Kelamin</label>
+              <div class="col-md-8 col-sm-8 ">
+                <select class="select2_single form-control" name="jenis_kelamin" id="edit_jenis_kelamin" tabindex="-1">
+                  <option value="Laki-Laki">Laki-Laki</option>
+                  <option value="Perempuan">Perempuan</option>
+                </select>
+              </div>
+            </div>
             <br>
             <div class="modal-footer">
               <button type="submit" class="btn btn-success">Edit</button>
@@ -226,6 +250,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="alamat_jamaah">Alamat</label>
                 <div class="col-md-8 col-sm-8 ">
                   <textarea class="form-control" name="alamat_jamaah" placeholder="Alamat" required><?= set_value('alamat_jamaah'); ?></textarea>
+                </div>
+              </div>
+
+              <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="alamat_jamaah">Tanggal Lahir</label>
+                <div class="col-md-8 col-sm-8 ">
+                  <div class='input-group date myDatepicker2'>
+                    <input type="text" class="form-control" placeholder="Tanggal Lahir " name="tanggal_lahir" required />
+                    <span class="input-group-addon" style="padding-top: 10px">
+                      <span class="fa fa-calendar-o"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="alamat_jamaah">Jenis Kelamin</label>
+                <div class="col-md-8 col-sm-8 ">
+                  <select class="select2_single form-control" name="jenis_kelamin" tabindex="-1">
+                    <option value="Laki-Laki">Laki-Laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                  </select>
                 </div>
               </div>
 
@@ -324,6 +370,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
   <script src="<?php echo base_url('js/jquery-ui.js') ?>"></script>
   <script src="<?php echo base_url('js/custom.min.js') ?>"></script>
 
+  <!-- bootstrap-daterangepicker -->
+  <script src="<?php echo base_url('assets/moment/min/moment.min.js') ?>"></script>
+  <script src="<?php echo base_url('assets/bootstrap-daterangepicker/daterangepicker.js') ?>"></script>
+
+  <!-- bootstrap-datetimepicker -->
+  <script src="<?php echo base_url('assets/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') ?>"></script>
+
   <script>
     function deleteConfirm(e, url) {
       e.preventDefault();
@@ -331,16 +384,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
       $('#deleteModal').modal();
     }
 
-    function editData(e, id_jamaah, nama, telepon, alamat) {
+    function editData(e, id_jamaah, nama, telepon, alamat, tanggal_lahir, jenis_kelamin) {
       e.preventDefault();
       $("#id_jamaah").val(id_jamaah);
       $("#nama_jamaah").val(nama);
       $("#telepon_jamaah").val(telepon);
       $("#alamat_jamaah").val(alamat);
+      $('#tanggal_lhr_edit').val(tanggal_lahir)
+      $('#edit_jenis_kelamin').val(jenis_kelamin)
       $('#editModal').modal();
     }
     $("input[name='telepon_jamaah']").on('input', function(e) {
       $(this).val($(this).val().replace(/[^0-9]/g, ''));
+    });
+    $('.myDatepicker3').datetimepicker({
+      format: 'YYYY-MM-DD',
+      defaultDate: new Date()
+    });
+    $('.myDatepicker2').datetimepicker({
+      format: 'YYYY-MM-DD',
+      defaultDate: new Date()
     });
   </script>
 
